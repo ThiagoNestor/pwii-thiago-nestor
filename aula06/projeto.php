@@ -12,10 +12,10 @@
         <input type="text" id="nome" name="nome"><br><br>
 
         <label for="idade">Idade:</label>
-        <input type="int" id="idade" name="idade"><br><br>
+        <input type="text" id="idade" name="idade"><br><br>
 
         <label for="cpf">CPF:</label>
-        <input type="int" id="cpf" name="cpf"><br><br>
+        <input type="text" id="cpf" name="cpf"><br><br>
 
         <input type="submit" value="Enviar">
     </form>
@@ -25,30 +25,29 @@
 
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST")
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-$servername = "localhost";
-$username = "thiagonestor";
-$password = "1292007";
-$dbname = "projetophp";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "projetophp";
 
-$nome = $_POST["nome"];
-$idade = $_POST["idade"];
-$cpf = $_POST["cpf"];
+    $nome = $_POST["nome"];
+    $idade = $_POST["idade"];
+    $cpf = $_POST["cpf"];
 
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $insert = $conn->prepare("insert into usuario (cpf, nome, idade) values(:cpf, :nome, :idade)");
+        $insert->execute([":nome" => $nome, ":idade" => $idade, ":cpf"=> $cpf]);
 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    $insert = $conn->prepare("insert into usuario values(:nome, :idade, :cpf)");
-    $insert->execute([":cpf" => $cpf, ":nome" => $nome, ":idade"=> $idade]);
+    } 
 
-} 
-
-catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
 }
-
 ?>

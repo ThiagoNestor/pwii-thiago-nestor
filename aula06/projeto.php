@@ -17,6 +17,12 @@
         <label for="cpf">CPF:</label>
         <input type="text" id="cpf" name="cpf"><br><br>
 
+        <label for="numero_cell">numero de celular:</label>
+        <input type="text" id="numero_cell" name="numero_cell"><br><br>
+
+        <label for="endereco">endereco:</label>
+        <input type="text" id="endereco" name="endereco"><br><br>
+
         <input type="submit" value="Enviar">
     </form>
 </body>
@@ -35,14 +41,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $nome = $_POST["nome"];
     $idade = $_POST["idade"];
     $cpf = $_POST["cpf"];
+    $numero_cell = $_POST["numero_cell"];
+    $endereco = $_POST["endereco"];
+
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        $insert = $conn->prepare("insert into usuario (cpf, nome, idade) values(:cpf, :nome, :idade)");
-        $insert->execute([":nome" => $nome, ":idade" => $idade, ":cpf"=> $cpf]);
+        $insert = $conn->prepare("insert into usuario (cpf, nome, idade, numero_cell, endereco) values(:cpf, :nome, :idade, :numero_cell, :endereco)");
+        $insert->execute([":nome" => $nome, ":idade" => $idade, ":cpf"=> $cpf, ":numero_cell" => $numero_cell, ":endereco" => $endereco]);
 
     } 
 

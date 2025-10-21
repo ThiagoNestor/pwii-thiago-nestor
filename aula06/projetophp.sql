@@ -11,7 +11,9 @@ use projetophp;
 create table usuario(
 cpf int primary key unique,
 nome varchar(100),
-idade int
+idade int,
+numero_cell int(15),
+endereco varchar(200)
 );
 
 select* from usuario 

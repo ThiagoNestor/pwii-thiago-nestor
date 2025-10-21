@@ -13,7 +13,8 @@ cpf int primary key unique,
 nome varchar(100),
 idade int,
 numero_cell int(15),
-endereco varchar(200)
+endereco varchar(200),
+email varchar(300)
 );
 
 select* from usuario 

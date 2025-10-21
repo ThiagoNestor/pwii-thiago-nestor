@@ -23,6 +23,9 @@
         <label for="endereco">endereco:</label>
         <input type="text" id="endereco" name="endereco"><br><br>
 
+        <label for="email">endereco:</label>
+        <input type="text" id="email" name="email"><br><br>
+
         <input type="submit" value="Enviar">
     </form>
 </body>
@@ -43,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $cpf = $_POST["cpf"];
     $numero_cell = $_POST["numero_cell"];
     $endereco = $_POST["endereco"];
+    $email = $_POST["email"];
 
 
     try {

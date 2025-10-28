@@ -7,6 +7,7 @@
     <title>Projetophp</title>
 </head>
 <body>
+    <a href='pagina_forms'>
     <form action="projeto.php" method="post">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome"><br><br>
@@ -46,7 +47,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $cpf = $_POST["cpf"];
     $numero_cell = $_POST["numero_cell"];
     $endereco = $_POST["endereco"];
-    $email = $_POST["email"];
 
 
     try {

@@ -17,4 +17,10 @@ endereco varchar(200),
 email varchar(300)
 );
 
+create table login(
+senha varchar(100) primary key,
+email varchar(300),
+foreign key (nome) references(nome)
+);
+
 select* from usuario 

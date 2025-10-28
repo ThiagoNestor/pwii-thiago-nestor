@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pagina_login</title>
+    <title>pagina de Login</title>
 </head>
 
+
 <body>
+
     <div class="page">
 
         <form method="POST" class="formLogin">
@@ -125,32 +127,3 @@ body {
 
 }
 </style>
-
-<?php
-    
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "projetophp";
-
-    $senha = $_POST["senha"];
-    $email = $_POST["email"];
-
-
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        $insert = $conn->prepare("insert into login (senha, email) values(:senha)");
-        $insert->execute([":senha" => $senha, ":email" => $email]);
-
-    } 
-
-    catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
-?>

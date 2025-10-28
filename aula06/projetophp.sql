@@ -18,8 +18,8 @@ email varchar(300)
 );
 
 create table login(
-senha varchar(100) primary key,
-email varchar(300),
+senha varchar(100),
+email varchar(300) primary key,
 foreign key (nome) references(nome)
 );
 

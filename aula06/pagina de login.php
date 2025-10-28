@@ -1,3 +1,29 @@
+<?php
+    
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    $senha = $_POST["senha"];
+    $email = $_POST["email"];
+
+
+    try {
+        $conn = new PDO("mysql:host=localhost;dbname=projetophp", "thiagonestor", "1292007");
+
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $insert = $conn->prepare("insert into login (senha, email) values(:senha, :email)");
+        $insert->execute([":senha" => $senha, ":email" => $email]);
+
+        header("Location: projeto.php");
+    } 
+
+    catch(PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +33,7 @@
 </head>
 
 <body>
+
     <div class="page">
 
         <form method="POST" class="formLogin">
@@ -14,13 +41,13 @@
             <h1>Login</h1>
             <p>Digite os seus dados de acesso no campo abaixo.</p>
               
-            <label for="email">endereco:</label>
+            <label for="email">email:</label>
             <input type="text" id="email" name="email"><br><br>
 
             <label for="senha">senha:</label>
             <input type="text" id="senha" name="senha"><br><br>
 
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar" onclick="ir()">
         </form>
 
     </div>
@@ -125,32 +152,3 @@ body {
 
 }
 </style>
-
-<?php
-    
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "projetophp";
-
-    $senha = $_POST["senha"];
-    $email = $_POST["email"];
-
-
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        $insert = $conn->prepare("insert into login (senha, email) values(:senha)");
-        $insert->execute([":senha" => $senha, ":email" => $email]);
-
-    } 
-
-    catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
-?>
